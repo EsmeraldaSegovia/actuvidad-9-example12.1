@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example 12-1</title>
+<meta name="viewport" content="width=device-width,
+height=device-height initial-scale=1.0,
+maximum-scale=1.0, user-scalable=no;" />
+<meta http-equiv="Content-type" content="text/html;
+charset=utf-8">
+<link rel="stylesheet" href="jquery.mobile1.0b3.min.css" />
+<script type="text/javascript" charset="utf-8"
+src="jquery1.6.4.min.js"></script>
+<script type="text/javascript" charset="utf-8"
+src="jquery.mobile1.0b3.min.js"></script>
+<script type="text/javascript" charset="utf-8"
+src="phonegap.js"></script>
+<script type="text/javascript" charset="utf-8">
+var results;
+function onBodyLoad() {
+//Add the PhoneGap deviceready event listener
+document.addEventListener("deviceready", onDeviceReady,
+false);
+}
+
+ptg8126969
+
+CApture At work 193
+
+function onDeviceReady() {
+//Get a handle to the results area of the page
+//we'll need it later
+res = document.getElementById("captureResults");
+}
+function doCapture() {
+//Clear out any previous results
+res.innerHTML = "Initiating capture...";
+//Get some values from the page
+var numItems =
+document.getElementById("numItems").value;
+var capDur =
+document.getElementById("duration").value;
+//Figure out which option is selected
+var captureType =
+document.getElementById("captureType").selectedIndex;
+switch(captureType) {
+case 0:
+//Capture Audio
+navigator.device.capture.captureAudio(
+onCaptureSuccess, onCaptureError,
+{duration: capDur, limit: numItems});
+break;
+case 1:
+//Capture Image
+navigator.device.capture.captureImage(
+onCaptureSuccess, onCaptureError,
+{limit: numItems});
+break;
+case 2:
+//Capture Video
+navigator.device.capture.captureVideo(
+onCaptureSuccess, onCaptureError,
+{duration: capDur, limit: numItems});
+break;
+}
+}
